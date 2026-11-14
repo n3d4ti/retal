@@ -4,6 +4,26 @@
 
 var retalNet = { ws: null, status: 0, queue: [] };
 
+// Which match server to use, first match wins:
+//   1. ?server=wss://example.com/ws in the page address
+//   2. RETAL_SERVER in config.js (static hosting such as GitHub Pages)
+//   3. the last server that worked on this device
+//   4. the site's own /ws (when the page is served by retal-server)
+function retalDefaultServer() {
+    try {
+        var q = new URLSearchParams(location.search).get("server");
+        if (q) { return q; }
+    } catch (e) { }
+    if (typeof RETAL_SERVER === "string" && RETAL_SERVER.length > 0) { return RETAL_SERVER; }
+    try {
+        var saved = localStorage.getItem("retal_server");
+        if (saved) { return saved; }
+    } catch (e) { }
+    var proto = location.protocol === "https:" ? "wss://" : "ws://";
+    var host = location.host || "127.0.0.1:8787";
+    return proto + host + "/ws";
+}
+
 function retalReadStr(ptr, len) {
     return new TextDecoder().decode(new Uint8Array(wasm_memory.buffer, ptr, len));
 }
@@ -28,7 +48,13 @@ miniquad_add_plugin({
             try {
                 var ws = new WebSocket(url);
                 retalNet.ws = ws;
-                ws.onopen = function () { if (retalNet.ws === ws) { retalNet.status = 2; } };
+                ws.onopen = function () {
+                    if (retalNet.ws === ws) {
+                        retalNet.status = 2;
+                        // remember a server that worked, for the next visit
+                        try { localStorage.setItem("retal_server", url); } catch (e) { }
+                    }
+                };
                 ws.onmessage = function (ev) {
                     if (retalNet.ws === ws && typeof ev.data === "string") {
                         retalNet.queue.push(new TextEncoder().encode(ev.data));
@@ -63,9 +89,7 @@ miniquad_add_plugin({
             return n;
         };
         env.retal_default_server = function (ptr, cap) {
-            var proto = location.protocol === "https:" ? "wss://" : "ws://";
-            var host = location.host || ("127.0.0.1:8787");
-            return retalWriteStr(proto + host + "/ws", ptr, cap);
+            return retalWriteStr(retalDefaultServer(), ptr, cap);
         };
         env.retal_prompt = function (lptr, llen, dptr, dlen, optr, ocap) {
             var label = retalReadStr(lptr, llen);

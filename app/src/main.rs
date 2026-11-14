@@ -58,8 +58,17 @@ fn parse_args() -> Args {
     a
 }
 
+/// Game steps per drawn frame during --self-test.
+const SELF_TEST_SUBSTEPS: u32 = 20;
+
 fn window_conf() -> Conf {
+    let testing = std::env::args().any(|a| a == "--self-test" || a == "--screenshot");
     Conf {
+        platform: miniquad::conf::Platform {
+            // checks must not wait for the screen refresh (a covered window may stop refreshing)
+            swap_interval: if testing { Some(0) } else { None },
+            ..Default::default()
+        },
         window_title: "Retal".to_string(),
         window_width: if std::env::args().any(|a| a == "--touch-ui") { 844 } else { 1280 },
         window_height: if std::env::args().any(|a| a == "--touch-ui") { 390 } else { 720 },
@@ -124,14 +133,18 @@ struct Models {
     rival: Model,
 }
 
-fn draw_world(g: &Game, cam: &Camera3D, v: &View, b: &mut Batch, m: &Models, show_player: bool) {
+fn draw_world(g: &Game, cam: &Camera3D, v: &View, b: &mut Batch, m: &Models, show_player: bool, mobile: bool) {
     world::draw_sky(&v.vp, v.eye, v.fwd, v.sw, v.sh);
     set_camera(cam);
     b.cam = v.eye;
     b.fog = true;
-    world::draw_ground(b, v.eye);
+    // phones: shorter view distance, fog closes in earlier
+    let radius = if mobile { world::GRID_RADIUS_MOBILE } else { world::GRID_RADIUS };
+    b.fog_end = radius as f32 * world::CELL * 0.95;
+    b.fog_start = b.fog_end * 0.25;
+    world::draw_ground(b, v.eye, radius);
     b.flush();
-    world::draw_mountains(b, v.eye);
+    world::draw_mountains(b, v.eye, if mobile { 5 } else { 8 });
     for gt in &g.ground {
         if !gt.alive || gt.pos.distance(v.eye) > 14000.0 {
             continue;
@@ -346,8 +359,15 @@ async fn main() {
         let mut c = inp.poll(sw, sh, state == State::Playing);
         let tapped = inp.last_touch_tap || is_mouse_button_pressed(MouseButton::Left);
 
-        // ---------------- self-test script ----------------
         let mut st_done = false;
+        // The self-test advances several fixed game steps per drawn frame, so it finishes quickly
+        // even when the window is covered and draws slowly.
+        let substeps = if st.is_some() { SELF_TEST_SUBSTEPS } else { 1 };
+        for _sub in 0..substeps {
+        if st_done {
+            break;
+        }
+        // ---------------- self-test script ----------------
         if let Some(t) = st.as_mut() {
             t.frame += 1;
             let tt = t.frame as f32 / 60.0;
@@ -517,8 +537,8 @@ async fn main() {
                     mpx.leave();
                     g = Game::new(diff_sel);
                     state = State::Lobby;
-                } else if tapped && invert_rect(sw, sh).contains(inp.last_tap_pos) {
-                    inp.invert_pitch = !inp.invert_pitch;
+                } else if tapped && pause_toggles_tap(&mut inp, sw, sh) {
+                    // invert / tilt sensitivity changed
                 } else if c.pause || c.confirm || tapped {
                     state = State::Playing;
                 }
@@ -539,8 +559,8 @@ async fn main() {
                 }
             }
             State::Paused => {
-                if tapped && invert_rect(sw, sh).contains(inp.last_tap_pos) {
-                    inp.invert_pitch = !inp.invert_pitch;
+                if tapped && pause_toggles_tap(&mut inp, sw, sh) {
+                    // invert / tilt sensitivity changed
                 } else if c.pause || c.confirm || tapped {
                     state = State::Playing;
                 }
@@ -555,12 +575,13 @@ async fn main() {
                 }
             }
         }
+        } // substeps
 
         // ---------------- draw ----------------
         let title_t = if matches!(state, State::Title | State::Lobby) { Some(t_total) } else { None };
         let (cam, view) = make_view(&g, &mut chase_eye, title_t);
         let show_player = title_t.is_some() || !g.cockpit || !g.player.alive;
-        draw_world(&g, &cam, &view, &mut batch, &models, show_player);
+        draw_world(&g, &cam, &view, &mut batch, &models, show_player, inp.touch_mode);
 
         let mut flags = HudFlags::default();
         match state {
@@ -593,22 +614,14 @@ async fn main() {
                     }
                     draw_scoreboard(&g, sw * 0.5 + 115.0 * s, 74.0 * s, s);
                     text_c(if inp.touch_mode { "TAP TO RESUME" } else { "P / ESC / ENTER TO RESUME" }, sw * 0.5, sh * 0.45 + 40.0 * s, 22.0 * s, hud_green());
-                    let r = invert_rect(sw, sh);
-                    draw_rectangle(r.x, r.y, r.w, r.h, Color::new(0.0, 0.1, 0.04, 0.8));
-                    draw_rectangle_lines(r.x, r.y, r.w, r.h, 2.0, hud_green());
-                    let lab = format!("INVERT PITCH: {}", if inp.invert_pitch { "ON" } else { "OFF" });
-                    text_c(&lab, r.x + r.w * 0.5, r.y + r.h * 0.65, 22.0 * s, hud_green());
+                    draw_pause_toggles(&inp, sw, sh);
                     lobby::button(leave_rect(sw, sh), if inp.touch_mode { "LEAVE MATCH" } else { "LEAVE MATCH (L)" }, true, hud_red(), None, bs);
                 } else if state == State::Paused {
                     draw_rectangle(0.0, 0.0, sw, sh, Color::new(0.0, 0.0, 0.0, 0.5));
                     let s = ui_scale(sw, sh);
                     text_c("PAUSED", sw * 0.5, sh * 0.45, 48.0 * s, hud_green());
                     text_c(if inp.touch_mode { "TAP TO RESUME" } else { "P / ESC / ENTER TO RESUME" }, sw * 0.5, sh * 0.45 + 40.0 * s, 22.0 * s, hud_green());
-                    let r = invert_rect(sw, sh);
-                    draw_rectangle(r.x, r.y, r.w, r.h, Color::new(0.0, 0.1, 0.04, 0.8));
-                    draw_rectangle_lines(r.x, r.y, r.w, r.h, 2.0, hud_green());
-                    let lab = format!("INVERT PITCH: {}", if inp.invert_pitch { "ON" } else { "OFF" });
-                    text_c(&lab, r.x + r.w * 0.5, r.y + r.h * 0.65, 22.0 * s, hud_green());
+                    draw_pause_toggles(&inp, sw, sh);
                     draw_picker(diff_sel, sw, sh, picker_y(state, sw, sh));
                 }
                 if state == State::GameOver {
@@ -637,7 +650,7 @@ async fn main() {
             f.radar |= flags.radar;
             f.lives |= flags.lives;
             f.wave |= flags.wave;
-            if t.frame == 400 {
+            if t.frame >= 400 && !f.touch_buttons {
                 // touch HUD: draw the phone controls once to make sure they render
                 let mut tf = HudFlags::default();
                 draw_touch_controls(&g, &inp, sw, sh, ui_scale(sw, sh), &mut tf);
@@ -670,6 +683,47 @@ async fn main() {
         }
 
         next_frame().await;
+    }
+}
+
+/// Pause screen toggles: INVERT PITCH, and on phones the tilt sensitivity next to it.
+fn pause_toggle_rects(sw: f32, sh: f32, touch: bool) -> (Rect, Option<Rect>) {
+    let r = invert_rect(sw, sh);
+    if !touch {
+        return (r, None);
+    }
+    let gap = 8.0;
+    let half = (r.w - gap) * 0.5;
+    (Rect::new(r.x, r.y, half, r.h), Some(Rect::new(r.x + half + gap, r.y, half, r.h)))
+}
+
+fn pause_toggles_tap(inp: &mut InputState, sw: f32, sh: f32) -> bool {
+    let (inv, sens) = pause_toggle_rects(sw, sh, inp.touch_mode);
+    if inv.contains(inp.last_tap_pos) {
+        inp.invert_pitch = !inp.invert_pitch;
+        return true;
+    }
+    if let Some(r) = sens {
+        if r.contains(inp.last_tap_pos) {
+            inp.tilt_sens = (inp.tilt_sens + 1) % TILT_SENS_NAMES.len();
+            return true;
+        }
+    }
+    false
+}
+
+fn draw_pause_toggles(inp: &InputState, sw: f32, sh: f32) {
+    let s = ui_scale(sw, sh);
+    let (inv, sens) = pause_toggle_rects(sw, sh, inp.touch_mode);
+    let mut boxes = vec![(inv, format!("{}: {}", if sens.is_some() { "INVERT" } else { "INVERT PITCH" }, if inp.invert_pitch { "ON" } else { "OFF" }))];
+    if let Some(r) = sens {
+        boxes.push((r, format!("TILT: {}", TILT_SENS_NAMES[inp.tilt_sens])));
+    }
+    for (r, lab) in boxes {
+        draw_rectangle(r.x, r.y, r.w, r.h, Color::new(0.0, 0.1, 0.04, 0.8));
+        draw_rectangle_lines(r.x, r.y, r.w, r.h, 2.0, hud_green());
+        let fs = (22.0 * s).max(13.0);
+        text_c(&lab, r.x + r.w * 0.5, r.y + r.h * 0.5 + fs * 0.35, fs, hud_green());
     }
 }
 
@@ -776,6 +830,15 @@ fn draw_title(tex: &Texture2D, inp: &InputState, hi: i32, t: f32) {
             "I  INVERT PITCH     WEAPONS NEVER RUN OUT - WATCH THE COOLDOWNS",
         ]
     };
+    if inp.touch_mode {
+        let (txt, col) = match tilt_state() {
+            1 => ("TILT SENSOR: ON", hud_green()),
+            2 => ("TILT SENSOR: BLOCKED - ALLOW MOTION ACCESS AND RELOAD, OR DRAG TO STEER", hud_amber()),
+            3 => ("NO TILT SENSOR - DRAG ON THE LEFT SIDE TO STEER", hud_amber()),
+            _ => ("TILT SENSOR: WAITING... (TILT THE PHONE)", hud_dim()),
+        };
+        text_c(txt, sw * 0.5, panel_y - 36.0 * s, (17.0 * s).max(13.0), col);
+    }
     for (i, l) in lines.iter().enumerate() {
         text_c(l, sw * 0.5, panel_y + i as f32 * 26.0 * s, 18.0 * s, Color::new(0.75, 1.0, 0.8, 1.0));
     }

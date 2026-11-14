@@ -5,4 +5,4 @@ set -e
 cd "$(dirname "$0")"
 cargo build --release --target wasm32-unknown-unknown --bin retal
 cp target/wasm32-unknown-unknown/release/retal.wasm web/retal.wasm
-echo "Browser build ready in web/ (index.html, mq_js_bundle.js, tilt.js, retal.wasm)"
+echo "Browser build ready in web/ (index.html, config.js, mq_js_bundle.js, tilt.js, net.js, retal.wasm)"

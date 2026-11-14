@@ -209,6 +209,7 @@ fn content_type(p: &Path) -> &'static str {
         "wasm" => "application/wasm",
         "png" => "image/png",
         "json" => "application/json",
+        "webmanifest" => "application/manifest+json",
         "css" => "text/css",
         _ => "application/octet-stream",
     }

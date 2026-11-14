@@ -9,6 +9,8 @@ extern "C" {
     fn retal_tilt_roll() -> f32;
     fn retal_tilt_pitch() -> f32;
     fn retal_is_touch() -> i32;
+    fn retal_tilt_epoch() -> i32;
+    fn retal_tilt_state() -> i32;
 }
 
 /// Tells the JS side which plugin version this build expects.
@@ -29,6 +31,26 @@ pub fn read_tilt() -> Option<(f32, f32)> {
     None
 }
 
+/// Changes whenever the phone is rotated (landscape <-> portrait): the game re-levels the tilt then.
+pub fn tilt_epoch() -> i32 {
+    #[cfg(target_arch = "wasm32")]
+    unsafe {
+        return retal_tilt_epoch();
+    }
+    #[allow(unreachable_code)]
+    0
+}
+
+/// 0 = waiting for data, 1 = working, 2 = permission refused, 3 = no sensor.
+pub fn tilt_state() -> i32 {
+    #[cfg(target_arch = "wasm32")]
+    unsafe {
+        return retal_tilt_state();
+    }
+    #[allow(unreachable_code)]
+    0
+}
+
 pub fn platform_is_touch() -> bool {
     #[cfg(target_arch = "wasm32")]
     unsafe {
@@ -43,14 +65,23 @@ pub const TILT_FULL_ROLL: f32 = 0.45; // rad of phone tilt for full roll (~26 de
 pub const TILT_FULL_PITCH: f32 = 0.40; // rad for full pitch (~23 deg)
 pub const TILT_DEADZONE: f32 = 0.05; // rad (~3 deg)
 
+/// Tilt sensitivity choices (pause screen on phones): phone tilt for full stick is multiplied by these.
+pub const TILT_SENS_NAMES: [&str; 3] = ["LOW", "NORMAL", "HIGH"];
+pub const TILT_SENS_SCALE: [f32; 3] = [1.4, 1.0, 0.7];
+
 pub fn tilt_to_stick(raw: (f32, f32), center: (f32, f32)) -> (f32, f32) {
+    tilt_to_stick_sens(raw, center, 1)
+}
+
+pub fn tilt_to_stick_sens(raw: (f32, f32), center: (f32, f32), sens: usize) -> (f32, f32) {
+    let k = TILT_SENS_SCALE[sens.min(2)];
     let f = |v: f32, full: f32| {
         let s = v.signum();
         let a = (v.abs() - TILT_DEADZONE).max(0.0) / (full - TILT_DEADZONE);
         (s * a).clamp(-1.0, 1.0)
     };
-    let roll = f(raw.0 - center.0, TILT_FULL_ROLL);
-    let pitch = f(raw.1 - center.1, TILT_FULL_PITCH);
+    let roll = f(raw.0 - center.0, TILT_FULL_ROLL * k);
+    let pitch = f(raw.1 - center.1, TILT_FULL_PITCH * k);
     (roll, pitch)
 }
 
@@ -138,6 +169,8 @@ pub struct InputState {
     pub tilt_stick: (f32, f32),
     pub last_touch_tap: bool,
     pub last_tap_pos: Vec2,
+    pub tilt_sens: usize,
+    last_epoch: i32,
 }
 
 impl InputState {
@@ -156,6 +189,8 @@ impl InputState {
             tilt_stick: (0.0, 0.0),
             last_touch_tap: false,
             last_tap_pos: Vec2::ZERO,
+            tilt_sens: 1,
+            last_epoch: 0,
         }
     }
 
@@ -305,13 +340,19 @@ impl InputState {
         }
 
         // ---------- tilt (gyroscope) ----------
+        let epoch = tilt_epoch();
+        if epoch != self.last_epoch {
+            // the phone was turned: whatever angle it is held at now becomes level
+            self.last_epoch = epoch;
+            self.tilt_calibrated = false;
+        }
         if let Some(raw) = read_tilt() {
             self.tilt_live = true;
             if !self.tilt_calibrated || c.recenter {
                 self.tilt_center = raw;
                 self.tilt_calibrated = true;
             }
-            let (r, p) = tilt_to_stick(raw, self.tilt_center);
+            let (r, p) = tilt_to_stick_sens(raw, self.tilt_center, self.tilt_sens);
             self.tilt_stick = (r, p);
             if in_flight {
                 c.roll += r;

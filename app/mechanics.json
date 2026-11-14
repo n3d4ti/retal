@@ -1190,6 +1190,57 @@
    "group": "multiplayer",
    "value": "the host leaves",
    "estimated": true
+  },
+  {
+   "name": "tilt sensitivity choices",
+   "group": "mobile",
+   "value": "LOW / NORMAL / HIGH (pause screen)",
+   "estimated": true
+  },
+  {
+   "name": "tilt angle multiplier LOW / NORMAL / HIGH",
+   "group": "mobile",
+   "value": "1.4 / 1.0 / 0.7",
+   "estimated": true
+  },
+  {
+   "name": "tilt smoothing (share of each new reading)",
+   "group": "mobile",
+   "value": 0.35,
+   "estimated": true
+  },
+  {
+   "name": "tilt re-levels when the phone is turned",
+   "group": "mobile",
+   "value": true,
+   "estimated": true
+  },
+  {
+   "name": "no tilt reading within",
+   "group": "mobile",
+   "value": 4,
+   "estimated": true,
+   "unit": "s (then drag-to-steer is offered)"
+  },
+  {
+   "name": "phone view distance (ground patches)",
+   "group": "mobile",
+   "value": 22,
+   "estimated": true,
+   "unit": "cells of 500 m"
+  },
+  {
+   "name": "computer view distance (ground patches)",
+   "group": "mobile",
+   "value": 34,
+   "estimated": true,
+   "unit": "cells of 500 m"
+  },
+  {
+   "name": "screen kept awake while playing on phones",
+   "group": "mobile",
+   "value": true,
+   "estimated": true
   }
  ]
 }

@@ -93,10 +93,13 @@ fn cell_color(cx: i32, cz: i32) -> Color {
     c
 }
 
-pub fn draw_ground(b: &mut Batch, cam: Vec3) {
+/// Phones draw fewer ground patches (shorter, foggier view) to keep the frame rate up.
+pub const GRID_RADIUS_MOBILE: i32 = 22;
+
+pub fn draw_ground(b: &mut Batch, cam: Vec3, radius: i32) {
     let ccx = (cam.x / CELL).floor() as i32;
     let ccz = (cam.z / CELL).floor() as i32;
-    let r = GRID_RADIUS;
+    let r = radius;
     for gz in -r..r {
         for gx in -r..r {
             let cx = ccx + gx;
@@ -121,10 +124,9 @@ pub fn draw_ground(b: &mut Batch, cam: Vec3) {
     }
 }
 
-pub fn draw_mountains(b: &mut Batch, cam: Vec3) {
+pub fn draw_mountains(b: &mut Batch, cam: Vec3, r: i32) {
     let tx = (cam.x / TILE).floor() as i32;
     let tz = (cam.z / TILE).floor() as i32;
-    let r = 8;
     let rock = Color::new(0.48, 0.42, 0.36, 1.0);
     let rock2 = Color::new(0.40, 0.38, 0.34, 1.0);
     let snow = Color::new(0.92, 0.93, 0.96, 1.0);

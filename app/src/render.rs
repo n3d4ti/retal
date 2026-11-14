@@ -43,6 +43,8 @@ pub struct Batch {
     idx: Vec<u16>,
     pub cam: Vec3,
     pub fog: bool,
+    pub fog_start: f32,
+    pub fog_end: f32,
     pub tris_drawn: usize,
 }
 
@@ -53,6 +55,8 @@ impl Batch {
             idx: Vec::with_capacity(4800),
             cam: Vec3::ZERO,
             fog: true,
+            fog_start: FOG_START,
+            fog_end: FOG_END,
             tris_drawn: 0,
         }
     }
@@ -62,7 +66,7 @@ impl Batch {
             return c;
         }
         let d = (p - self.cam).length();
-        let t = ((d - FOG_START) / (FOG_END - FOG_START)).clamp(0.0, 1.0);
+        let t = ((d - self.fog_start) / (self.fog_end - self.fog_start)).clamp(0.0, 1.0);
         mix(c, horizon_color(), t * t * (3.0 - 2.0 * t))
     }
 

@@ -217,3 +217,13 @@ Effective radar missile cooldown: 2.4 s / 4.0 s / 5.0 s; radar lock time: 0.48 s
 | shooting down a pilot | 300 points x difficulty | estimated |
 | bots | hunt the nearest living pilot; the host's computer runs them | estimated |
 | match ends | when the host leaves | estimated |
+
+## Phones (static website)
+
+| Value | Amount | Source |
+|---|---|---|
+| tilt sensitivity | LOW / NORMAL / HIGH on the pause screen (full stick at 1.4x / 1x / 0.7x the normal 26 deg roll, 23 deg pitch) | estimated |
+| tilt smoothing | each reading moves the stick 35 % of the way (removes sensor jitter) | estimated |
+| re-level | automatic when the phone is turned; LEVEL button any time | estimated |
+| view distance on phones | 11 km (computers 17 km) | estimated |
+| screen | kept awake while playing; game area avoids notches | estimated |

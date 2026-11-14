@@ -21,3 +21,6 @@ Choose MULTIPLAYER on the title screen. CREATE MATCH lets you name it, make it P
 Everyone must reach the same Retal server:
 - **Desktop game:** if no server is running on the computer, the game starts one itself (port 8787). Friends on the same network start their game with `--server ws://<your-ip>:8787/ws`, or open `http://<your-ip>:8787/` in a browser.
 - **Browser / phones:** run `retal-server` (`cargo run --release --bin retal-server`) on a computer everyone can reach. It serves the browser game and the matches on port 8787. For phones over the internet put it behind HTTPS (the tilt sensor needs it); the game then uses `wss://` automatically.
+
+## Static website (GitHub Pages and similar)
+Run `./build_static.sh`. The `public-html/` folder is then a complete website you can upload to any static host. See `deploy/STATIC-HOSTING.md` for GitHub Pages steps (an example workflow is in `deploy/github-pages.yml`) and for pointing multiplayer at a match server through `public-html/config.js`.
