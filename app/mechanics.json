@@ -1,0 +1,1195 @@
+{
+ "version": 1,
+ "values": [
+  {
+   "name": "idle target speed",
+   "group": "flight",
+   "value": 100,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "military power target speed (90% throttle)",
+   "group": "flight",
+   "value": 330,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "afterburner target speed (100% throttle)",
+   "group": "flight",
+   "value": 420,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "max speed (diving)",
+   "group": "flight",
+   "value": 470,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "min speed",
+   "group": "flight",
+   "value": 60,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "stall speed",
+   "group": "flight",
+   "value": 95,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "speed response",
+   "group": "flight",
+   "value": 0.35,
+   "unit": "1/s",
+   "estimated": true
+  },
+  {
+   "name": "climb/dive speed exchange",
+   "group": "flight",
+   "value": 0.9,
+   "unit": "x g",
+   "estimated": true
+  },
+  {
+   "name": "throttle change rate",
+   "group": "flight",
+   "value": 0.6,
+   "unit": "per s",
+   "estimated": true
+  },
+  {
+   "name": "pitch rate up",
+   "group": "flight",
+   "value": 1.35,
+   "unit": "rad/s",
+   "estimated": true
+  },
+  {
+   "name": "pitch rate down",
+   "group": "flight",
+   "value": 0.95,
+   "unit": "rad/s",
+   "estimated": true
+  },
+  {
+   "name": "roll rate",
+   "group": "flight",
+   "value": 3.3,
+   "unit": "rad/s",
+   "estimated": true
+  },
+  {
+   "name": "rudder yaw rate",
+   "group": "flight",
+   "value": 0.35,
+   "unit": "rad/s",
+   "estimated": true
+  },
+  {
+   "name": "bank-to-turn rate at 90 deg bank",
+   "group": "flight",
+   "value": 0.55,
+   "unit": "rad/s",
+   "estimated": true
+  },
+  {
+   "name": "service ceiling",
+   "group": "flight",
+   "value": 15000,
+   "unit": "m",
+   "estimated": true
+  },
+  {
+   "name": "start altitude",
+   "group": "flight",
+   "value": 2000,
+   "unit": "m",
+   "estimated": true
+  },
+  {
+   "name": "start speed",
+   "group": "flight",
+   "value": 250,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "cockpit vertical field of view",
+   "group": "camera",
+   "value": 55,
+   "unit": "deg",
+   "estimated": true
+  },
+  {
+   "name": "chase view field of view",
+   "group": "camera",
+   "value": 60,
+   "unit": "deg",
+   "estimated": true
+  },
+  {
+   "name": "chase camera distance",
+   "group": "camera",
+   "value": 38,
+   "unit": "m",
+   "estimated": true
+  },
+  {
+   "name": "view distance (fog end)",
+   "group": "camera",
+   "value": 16000,
+   "unit": "m",
+   "estimated": true
+  },
+  {
+   "name": "gun fire rate",
+   "group": "weapons",
+   "value": 18,
+   "unit": "rounds/s",
+   "estimated": true
+  },
+  {
+   "name": "gun muzzle speed",
+   "group": "weapons",
+   "value": 1100,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "gun range (life 1.4 s)",
+   "group": "weapons",
+   "value": 1540,
+   "unit": "m",
+   "estimated": true
+  },
+  {
+   "name": "gun damage",
+   "group": "weapons",
+   "value": 8,
+   "unit": "hp",
+   "estimated": true
+  },
+  {
+   "name": "gun spread",
+   "group": "weapons",
+   "value": 0.004,
+   "unit": "rad",
+   "estimated": true
+  },
+  {
+   "name": "gun heat per shot",
+   "group": "weapons",
+   "value": 3,
+   "unit": "%",
+   "estimated": true
+  },
+  {
+   "name": "gun cooling",
+   "group": "weapons",
+   "value": 32,
+   "unit": "%/s",
+   "estimated": true
+  },
+  {
+   "name": "gun resumes after overheat at",
+   "group": "weapons",
+   "value": 35,
+   "unit": "%",
+   "estimated": true
+  },
+  {
+   "name": "gun ammo",
+   "group": "weapons",
+   "value": "infinite",
+   "estimated": true
+  },
+  {
+   "name": "IR missile cooldown",
+   "group": "weapons",
+   "value": 1.2,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "IR missile lock range",
+   "group": "weapons",
+   "value": 3500,
+   "unit": "m",
+   "estimated": true
+  },
+  {
+   "name": "IR missile lock cone half-angle",
+   "group": "weapons",
+   "value": 25,
+   "unit": "deg",
+   "estimated": true
+  },
+  {
+   "name": "IR missile lock time",
+   "group": "weapons",
+   "value": 0.6,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "IR missile speed",
+   "group": "weapons",
+   "value": 700,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "IR missile turn rate",
+   "group": "weapons",
+   "value": 3.5,
+   "unit": "rad/s",
+   "estimated": true
+  },
+  {
+   "name": "IR missile flight time",
+   "group": "weapons",
+   "value": 6,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "IR missile damage",
+   "group": "weapons",
+   "value": 120,
+   "unit": "hp",
+   "estimated": true
+  },
+  {
+   "name": "radar missile cooldown",
+   "group": "weapons",
+   "value": 4.0,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "radar missile lock range",
+   "group": "weapons",
+   "value": 8000,
+   "unit": "m",
+   "estimated": true
+  },
+  {
+   "name": "radar missile lock cone half-angle",
+   "group": "weapons",
+   "value": 40,
+   "unit": "deg",
+   "estimated": true
+  },
+  {
+   "name": "radar missile lock time",
+   "group": "weapons",
+   "value": 1.2,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "radar missile speed",
+   "group": "weapons",
+   "value": 800,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "radar missile turn rate",
+   "group": "weapons",
+   "value": 2.2,
+   "unit": "rad/s",
+   "estimated": true
+  },
+  {
+   "name": "radar missile flight time",
+   "group": "weapons",
+   "value": 12,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "radar missile damage",
+   "group": "weapons",
+   "value": 120,
+   "unit": "hp",
+   "estimated": true
+  },
+  {
+   "name": "ground missile cooldown",
+   "group": "weapons",
+   "value": 3.0,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "ground missile lock range",
+   "group": "weapons",
+   "value": 6000,
+   "unit": "m",
+   "estimated": true
+  },
+  {
+   "name": "ground missile lock cone half-angle",
+   "group": "weapons",
+   "value": 35,
+   "unit": "deg",
+   "estimated": true
+  },
+  {
+   "name": "ground missile lock time",
+   "group": "weapons",
+   "value": 0.8,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "ground missile speed",
+   "group": "weapons",
+   "value": 520,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "ground missile turn rate",
+   "group": "weapons",
+   "value": 2.5,
+   "unit": "rad/s",
+   "estimated": true
+  },
+  {
+   "name": "ground missile flight time",
+   "group": "weapons",
+   "value": 14,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "ground missile damage",
+   "group": "weapons",
+   "value": 200,
+   "unit": "hp",
+   "estimated": true
+  },
+  {
+   "name": "missile payload",
+   "group": "weapons",
+   "value": "infinite (cooldown only)",
+   "estimated": true
+  },
+  {
+   "name": "missile blast radius",
+   "group": "weapons",
+   "value": 30,
+   "unit": "m",
+   "estimated": true
+  },
+  {
+   "name": "proximity fuse",
+   "group": "weapons",
+   "value": 14,
+   "unit": "m",
+   "estimated": true
+  },
+  {
+   "name": "flare cooldown",
+   "group": "weapons",
+   "value": 5,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "flares per salvo",
+   "group": "weapons",
+   "value": 6,
+   "estimated": true
+  },
+  {
+   "name": "flare decoy chance per salvo",
+   "group": "weapons",
+   "value": 0.75,
+   "estimated": true
+  },
+  {
+   "name": "player hull",
+   "group": "health",
+   "value": 100,
+   "unit": "hp",
+   "estimated": true
+  },
+  {
+   "name": "hull regen delay",
+   "group": "health",
+   "value": 6,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "hull regen rate",
+   "group": "health",
+   "value": 3,
+   "unit": "hp/s",
+   "estimated": true
+  },
+  {
+   "name": "lives at start",
+   "group": "health",
+   "value": 3,
+   "estimated": true
+  },
+  {
+   "name": "extra life every",
+   "group": "health",
+   "value": 10000,
+   "unit": "points",
+   "estimated": true
+  },
+  {
+   "name": "respawn delay",
+   "group": "health",
+   "value": 3,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "respawn shield",
+   "group": "health",
+   "value": 3,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "fighter hp",
+   "group": "enemies",
+   "value": 40,
+   "unit": "hp",
+   "estimated": true
+  },
+  {
+   "name": "fighter speed",
+   "group": "enemies",
+   "value": 230,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "fighter turn rate",
+   "group": "enemies",
+   "value": 0.95,
+   "unit": "rad/s",
+   "estimated": true
+  },
+  {
+   "name": "fighter gun range",
+   "group": "enemies",
+   "value": 900,
+   "unit": "m",
+   "estimated": true
+  },
+  {
+   "name": "fighter gun interval",
+   "group": "enemies",
+   "value": 0.125,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "fighter bullet damage",
+   "group": "enemies",
+   "value": 3,
+   "unit": "hp",
+   "estimated": true
+  },
+  {
+   "name": "fighter missile cooldown",
+   "group": "enemies",
+   "value": "12-18",
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "ace hp",
+   "group": "enemies",
+   "value": 70,
+   "unit": "hp",
+   "estimated": true
+  },
+  {
+   "name": "ace speed",
+   "group": "enemies",
+   "value": 290,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "ace turn rate",
+   "group": "enemies",
+   "value": 1.3,
+   "unit": "rad/s",
+   "estimated": true
+  },
+  {
+   "name": "ace gun range",
+   "group": "enemies",
+   "value": 1000,
+   "unit": "m",
+   "estimated": true
+  },
+  {
+   "name": "ace gun interval",
+   "group": "enemies",
+   "value": 0.1,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "ace bullet damage",
+   "group": "enemies",
+   "value": 4,
+   "unit": "hp",
+   "estimated": true
+  },
+  {
+   "name": "ace missile cooldown",
+   "group": "enemies",
+   "value": "8-12",
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "enemy missile speed",
+   "group": "enemies",
+   "value": 560,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "enemy missile turn rate",
+   "group": "enemies",
+   "value": 2.1,
+   "unit": "rad/s",
+   "estimated": true
+  },
+  {
+   "name": "enemy missile damage",
+   "group": "enemies",
+   "value": 35,
+   "unit": "hp",
+   "estimated": true
+  },
+  {
+   "name": "SAM range",
+   "group": "enemies",
+   "value": 7000,
+   "unit": "m",
+   "estimated": true
+  },
+  {
+   "name": "SAM max target altitude",
+   "group": "enemies",
+   "value": 6000,
+   "unit": "m",
+   "estimated": true
+  },
+  {
+   "name": "SAM cooldown",
+   "group": "enemies",
+   "value": "10-14 s",
+   "estimated": true
+  },
+  {
+   "name": "SAM speed",
+   "group": "enemies",
+   "value": 600,
+   "unit": "m/s",
+   "estimated": true
+  },
+  {
+   "name": "wave kill quota",
+   "group": "waves",
+   "value": "4 + 2 x wave",
+   "estimated": true
+  },
+  {
+   "name": "enemies in the air at once",
+   "group": "waves",
+   "value": "min(2 + wave, 8)",
+   "estimated": true
+  },
+  {
+   "name": "ground targets at once",
+   "group": "waves",
+   "value": "min(4 + wave/2, 8)",
+   "estimated": true
+  },
+  {
+   "name": "ace chance",
+   "group": "waves",
+   "value": "15% per wave from wave 3, max 60%",
+   "estimated": true
+  },
+  {
+   "name": "enemy speed growth per wave",
+   "group": "waves",
+   "value": 3,
+   "unit": "%",
+   "estimated": true
+  },
+  {
+   "name": "spawn interval",
+   "group": "waves",
+   "value": 2.5,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "spawn distance",
+   "group": "waves",
+   "value": "5000-7000 m",
+   "estimated": true
+  },
+  {
+   "name": "pause between waves",
+   "group": "waves",
+   "value": 4,
+   "unit": "s",
+   "estimated": true
+  },
+  {
+   "name": "endless waves",
+   "group": "waves",
+   "value": true,
+   "estimated": true
+  },
+  {
+   "name": "fighter score",
+   "group": "scoring",
+   "value": "100 + 25 x (wave-1)",
+   "estimated": true
+  },
+  {
+   "name": "ace score",
+   "group": "scoring",
+   "value": "250 + 25 x (wave-1)",
+   "estimated": true
+  },
+  {
+   "name": "SAM score",
+   "group": "scoring",
+   "value": 150,
+   "estimated": true
+  },
+  {
+   "name": "tank score",
+   "group": "scoring",
+   "value": 75,
+   "estimated": true
+  },
+  {
+   "name": "hangar score",
+   "group": "scoring",
+   "value": 50,
+   "estimated": true
+  },
+  {
+   "name": "wave clear bonus",
+   "group": "scoring",
+   "value": "500 x wave",
+   "estimated": true
+  },
+  {
+   "name": "pitch",
+   "group": "controls",
+   "value": "Arrows Up/Down or W/S (Down = pull up)",
+   "estimated": true
+  },
+  {
+   "name": "roll",
+   "group": "controls",
+   "value": "Arrows Left/Right or A/D",
+   "estimated": true
+  },
+  {
+   "name": "rudder",
+   "group": "controls",
+   "value": "Q / E",
+   "estimated": true
+  },
+  {
+   "name": "throttle",
+   "group": "controls",
+   "value": "Shift / Ctrl (also + / -, PageUp/PageDown)",
+   "estimated": true
+  },
+  {
+   "name": "gun",
+   "group": "controls",
+   "value": "Space or left mouse (hold)",
+   "estimated": true
+  },
+  {
+   "name": "missile",
+   "group": "controls",
+   "value": "Enter, M or right mouse",
+   "estimated": true
+  },
+  {
+   "name": "weapon select",
+   "group": "controls",
+   "value": "Tab / R cycle, 1-3 direct (radar missile selected at start)",
+   "estimated": true
+  },
+  {
+   "name": "target cycle",
+   "group": "controls",
+   "value": "T",
+   "estimated": true
+  },
+  {
+   "name": "flares",
+   "group": "controls",
+   "value": "F or X",
+   "estimated": true
+  },
+  {
+   "name": "view",
+   "group": "controls",
+   "value": "V or C",
+   "estimated": true
+  },
+  {
+   "name": "pause",
+   "group": "controls",
+   "value": "P or Esc",
+   "estimated": true
+  },
+  {
+   "name": "invert pitch",
+   "group": "controls",
+   "value": "I or pause screen toggle",
+   "estimated": true
+  },
+  {
+   "name": "phone steering",
+   "group": "controls",
+   "value": "tilt the phone (gyroscope); drag stick if no sensor",
+   "estimated": true
+  },
+  {
+   "name": "phone fire",
+   "group": "controls",
+   "value": "GUN (hold) and MSL (tap) buttons",
+   "estimated": true
+  },
+  {
+   "name": "phone throttle",
+   "group": "controls",
+   "value": "left slider",
+   "estimated": true
+  },
+  {
+   "name": "phone tilt for full roll",
+   "group": "controls",
+   "value": 26,
+   "unit": "deg",
+   "estimated": true
+  },
+  {
+   "name": "phone tilt for full pitch",
+   "group": "controls",
+   "value": 23,
+   "unit": "deg",
+   "estimated": true
+  },
+  {
+   "name": "phone tilt dead zone",
+   "group": "controls",
+   "value": 3,
+   "unit": "deg",
+   "estimated": true
+  },
+  {
+   "name": "default weapon",
+   "group": "weapons",
+   "value": "radar missile",
+   "estimated": true
+  },
+  {
+   "name": "default difficulty",
+   "group": "difficulty",
+   "value": "NORMAL",
+   "estimated": true
+  },
+  {
+   "name": "easy: enemy gun spread multiplier",
+   "group": "difficulty",
+   "value": 2.0,
+   "estimated": true
+  },
+  {
+   "name": "normal: enemy gun spread multiplier",
+   "group": "difficulty",
+   "value": 1.0,
+   "estimated": true
+  },
+  {
+   "name": "hard: enemy gun spread multiplier",
+   "group": "difficulty",
+   "value": 0.65,
+   "estimated": true
+  },
+  {
+   "name": "easy: enemy turn rate multiplier",
+   "group": "difficulty",
+   "value": 0.75,
+   "estimated": true
+  },
+  {
+   "name": "normal: enemy turn rate multiplier",
+   "group": "difficulty",
+   "value": 1.0,
+   "estimated": true
+  },
+  {
+   "name": "hard: enemy turn rate multiplier",
+   "group": "difficulty",
+   "value": 1.15,
+   "estimated": true
+  },
+  {
+   "name": "easy: enemy speed multiplier",
+   "group": "difficulty",
+   "value": 0.88,
+   "estimated": true
+  },
+  {
+   "name": "normal: enemy speed multiplier",
+   "group": "difficulty",
+   "value": 1.0,
+   "estimated": true
+  },
+  {
+   "name": "hard: enemy speed multiplier",
+   "group": "difficulty",
+   "value": 1.08,
+   "estimated": true
+  },
+  {
+   "name": "easy: enemy damage multiplier (guns, missiles, SAMs)",
+   "group": "difficulty",
+   "value": 0.5,
+   "estimated": true
+  },
+  {
+   "name": "normal: enemy damage multiplier (guns, missiles, SAMs)",
+   "group": "difficulty",
+   "value": 1.0,
+   "estimated": true
+  },
+  {
+   "name": "hard: enemy damage multiplier (guns, missiles, SAMs)",
+   "group": "difficulty",
+   "value": 1.4,
+   "estimated": true
+  },
+  {
+   "name": "easy: enemy hp multiplier",
+   "group": "difficulty",
+   "value": 0.7,
+   "estimated": true
+  },
+  {
+   "name": "normal: enemy hp multiplier",
+   "group": "difficulty",
+   "value": 1.0,
+   "estimated": true
+  },
+  {
+   "name": "hard: enemy hp multiplier",
+   "group": "difficulty",
+   "value": 1.3,
+   "estimated": true
+  },
+  {
+   "name": "easy: enemy missile/SAM cooldown multiplier",
+   "group": "difficulty",
+   "value": 1.7,
+   "estimated": true
+  },
+  {
+   "name": "normal: enemy missile/SAM cooldown multiplier",
+   "group": "difficulty",
+   "value": 1.0,
+   "estimated": true
+  },
+  {
+   "name": "hard: enemy missile/SAM cooldown multiplier",
+   "group": "difficulty",
+   "value": 0.7,
+   "estimated": true
+  },
+  {
+   "name": "easy: enemy evade tendency multiplier",
+   "group": "difficulty",
+   "value": 0.4,
+   "estimated": true
+  },
+  {
+   "name": "normal: enemy evade tendency multiplier",
+   "group": "difficulty",
+   "value": 1.0,
+   "estimated": true
+  },
+  {
+   "name": "hard: enemy evade tendency multiplier",
+   "group": "difficulty",
+   "value": 1.8,
+   "estimated": true
+  },
+  {
+   "name": "easy: extra enemies in the air",
+   "group": "difficulty",
+   "value": -1,
+   "estimated": true
+  },
+  {
+   "name": "normal: extra enemies in the air",
+   "group": "difficulty",
+   "value": 0,
+   "estimated": true
+  },
+  {
+   "name": "hard: extra enemies in the air",
+   "group": "difficulty",
+   "value": 1,
+   "estimated": true
+  },
+  {
+   "name": "easy: player lock time multiplier",
+   "group": "difficulty",
+   "value": 0.4,
+   "estimated": true
+  },
+  {
+   "name": "normal: player lock time multiplier",
+   "group": "difficulty",
+   "value": 1.0,
+   "estimated": true
+  },
+  {
+   "name": "hard: player lock time multiplier",
+   "group": "difficulty",
+   "value": 1.3,
+   "estimated": true
+  },
+  {
+   "name": "easy: player lock cone multiplier",
+   "group": "difficulty",
+   "value": 1.5,
+   "estimated": true
+  },
+  {
+   "name": "normal: player lock cone multiplier",
+   "group": "difficulty",
+   "value": 1.0,
+   "estimated": true
+  },
+  {
+   "name": "hard: player lock cone multiplier",
+   "group": "difficulty",
+   "value": 0.85,
+   "estimated": true
+  },
+  {
+   "name": "easy: player missile cooldown multiplier",
+   "group": "difficulty",
+   "value": 0.6,
+   "estimated": true
+  },
+  {
+   "name": "normal: player missile cooldown multiplier",
+   "group": "difficulty",
+   "value": 1.0,
+   "estimated": true
+  },
+  {
+   "name": "hard: player missile cooldown multiplier",
+   "group": "difficulty",
+   "value": 1.25,
+   "estimated": true
+  },
+  {
+   "name": "easy: player missile turn multiplier",
+   "group": "difficulty",
+   "value": 1.4,
+   "estimated": true
+  },
+  {
+   "name": "normal: player missile turn multiplier",
+   "group": "difficulty",
+   "value": 1.0,
+   "estimated": true
+  },
+  {
+   "name": "hard: player missile turn multiplier",
+   "group": "difficulty",
+   "value": 0.9,
+   "estimated": true
+  },
+  {
+   "name": "easy: player gun hit radius",
+   "group": "difficulty",
+   "value": 15,
+   "estimated": true,
+   "unit": "m"
+  },
+  {
+   "name": "normal: player gun hit radius",
+   "group": "difficulty",
+   "value": 9,
+   "estimated": true,
+   "unit": "m"
+  },
+  {
+   "name": "hard: player gun hit radius",
+   "group": "difficulty",
+   "value": 7,
+   "estimated": true,
+   "unit": "m"
+  },
+  {
+   "name": "easy: player gun aim assist cone",
+   "group": "difficulty",
+   "value": 5.0,
+   "estimated": true,
+   "unit": "deg"
+  },
+  {
+   "name": "normal: player gun aim assist cone",
+   "group": "difficulty",
+   "value": 1.5,
+   "estimated": true,
+   "unit": "deg"
+  },
+  {
+   "name": "hard: player gun aim assist cone",
+   "group": "difficulty",
+   "value": 0.0,
+   "estimated": true,
+   "unit": "deg"
+  },
+  {
+   "name": "easy: fire-and-forget missiles (home before full lock)",
+   "group": "difficulty",
+   "value": true,
+   "estimated": true
+  },
+  {
+   "name": "normal: fire-and-forget missiles (home before full lock)",
+   "group": "difficulty",
+   "value": false,
+   "estimated": true
+  },
+  {
+   "name": "hard: fire-and-forget missiles (home before full lock)",
+   "group": "difficulty",
+   "value": false,
+   "estimated": true
+  },
+  {
+   "name": "easy: score multiplier",
+   "group": "difficulty",
+   "value": 0.5,
+   "estimated": true
+  },
+  {
+   "name": "normal: score multiplier",
+   "group": "difficulty",
+   "value": 1.0,
+   "estimated": true
+  },
+  {
+   "name": "hard: score multiplier",
+   "group": "difficulty",
+   "value": 1.5,
+   "estimated": true
+  },
+  {
+   "name": "max players per match",
+   "group": "multiplayer",
+   "value": 8,
+   "estimated": true
+  },
+  {
+   "name": "match modes",
+   "group": "multiplayer",
+   "value": "co-op vs waves, dogfight (all vs all, bots keep flying)",
+   "estimated": true
+  },
+  {
+   "name": "match access",
+   "group": "multiplayer",
+   "value": "public (anyone joins) or private (password)",
+   "estimated": true
+  },
+  {
+   "name": "match code length",
+   "group": "multiplayer",
+   "value": 4,
+   "estimated": true,
+   "unit": "letters"
+  },
+  {
+   "name": "own aircraft update rate",
+   "group": "multiplayer",
+   "value": 15,
+   "estimated": true,
+   "unit": "per s"
+  },
+  {
+   "name": "host world snapshot rate",
+   "group": "multiplayer",
+   "value": 10,
+   "estimated": true,
+   "unit": "per s"
+  },
+  {
+   "name": "respawns in online matches",
+   "group": "multiplayer",
+   "value": "unlimited",
+   "estimated": true
+  },
+  {
+   "name": "pilot shoot-down score",
+   "group": "multiplayer",
+   "value": 300,
+   "estimated": true,
+   "unit": "points (x difficulty)"
+  },
+  {
+   "name": "default server port",
+   "group": "multiplayer",
+   "value": 8787,
+   "estimated": true
+  },
+  {
+   "name": "bots hunt",
+   "group": "multiplayer",
+   "value": "nearest living pilot",
+   "estimated": true
+  },
+  {
+   "name": "match ends when",
+   "group": "multiplayer",
+   "value": "the host leaves",
+   "estimated": true
+  }
+ ]
+}

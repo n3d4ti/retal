@@ -1,0 +1,15 @@
+{
+  "id": "unk_5b1f0ccd073f341e",
+  "revision": 2,
+  "question": "Exact flight, weapon and enemy numbers of the original (speeds, turn rates, damage, cooldowns, key bindings)",
+  "severity": "medium",
+  "domain": "mechanics",
+  "status": "blocked",
+  "probes": [
+    "Deep mode to read the original's data",
+    "Person's description of the original's controls and feel"
+  ],
+  "evidence_for": [],
+  "evidence_against": [],
+  "resolution": "Clean room: all 121 values in mechanics.json are estimated arcade numbers (infinite weapons on cooldowns, endless waves per the request). Needs Deep mode or the person's description to match the original."
+}

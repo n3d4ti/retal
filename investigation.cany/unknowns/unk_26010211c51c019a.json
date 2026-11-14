@@ -1,0 +1,14 @@
+{
+  "id": "unk_26010211c51c019a",
+  "revision": 2,
+  "question": "How the original looks in play (no reference pictures or capture of it running)",
+  "severity": "medium",
+  "domain": "visuals",
+  "status": "blocked",
+  "probes": [
+    "Person adds screenshots to reference/"
+  ],
+  "evidence_for": [],
+  "evidence_against": [],
+  "resolution": "No reference pictures exist; built an original flat-shaded cockpit look (green HUD, instrument panel with radar, patchwork terrain, polygon mountains). Needs screenshots in reference/ to compare."
+}

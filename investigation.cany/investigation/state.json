@@ -1,0 +1,42 @@
+{
+  "revision": 6,
+  "brief": {
+    "question": "Build an original arcade jet-combat game in the spirit of a 1989 cockpit flight sim: infinite weapons on cooldown timers, endless respawning enemy waves; playable natively, in a browser and on phones (tilt to steer, on-screen buttons to shoot).",
+    "purpose": "Spiritual successor game for the person, who doesn't code.",
+    "targets": [
+      "/home/attila/retal (clean room, not opened)"
+    ],
+    "constraints": [
+      "Clean room: nothing inside the original is read",
+      "Rust + macroquad, cargo project in app/",
+      "Web build (wasm) must run on phones with gyroscope + touch buttons"
+    ],
+    "done_when": "cargo build succeeds, --screenshot and --self-test pass, web build in app/web loads with tilt + touch controls, mechanics sheet written."
+  },
+  "plan": [
+    {
+      "title": "Set up the game project for computer and browser",
+      "status": "done"
+    },
+    {
+      "title": "Build flying, weapons with cooldowns and endless enemy waves",
+      "status": "done"
+    },
+    {
+      "title": "Draw the cockpit display: speed, altitude, radar, weapons, score",
+      "status": "done"
+    },
+    {
+      "title": "Add phone controls: tilt to steer, tap buttons to shoot",
+      "status": "done"
+    },
+    {
+      "title": "Make the browser version and test everything",
+      "status": "done"
+    }
+  ],
+  "hypotheses": [],
+  "findings": [],
+  "handoff": "Multiplayer added (host chose: both Co-op and Dogfight, picked when creating a match). Files: src/wsproto.rs (hand-written SHA-1/base64/WebSocket frames), src/server.rs + src/bin/retal-server.rs (lobby: HELLO/LIST/CREATE/JOIN/LEAVE/R/T relay, rooms public or password, 8 max, closes when host leaves; also serves web/), src/net.rs (native thread ws client / wasm via web/net.js plugin; browser text entry via window.prompt), src/mp.rs (match sync: P own state 15Hz, W host snapshot 10Hz, H/HG hits to host, K kills, D bot damage, PH/PK dogfight, FL flares), src/lobby.rs (menus), game.rs (MatchMode, Remote, NetOut, authority=host runs bots; clients mirror). Desktop game auto-starts an embedded server on port 8787 if none reachable at localhost. Self-test 'multiplayer' step runs a full in-process flow incl. wrong password, public join, dogfight kill. Preview flags: --lobby, --create, --title, --touch-ui with --screenshot. Cargo default-run=retal; build_web.sh builds --bin retal. Not done: host migration, persistence of names, NAT/internet hosting help (needs a reachable server; phones need HTTPS -> wss). One unexplained early test stall did not reproduce in 9 later runs.",
+  "updated": "2026-11-12T18:19:31Z"
+}
